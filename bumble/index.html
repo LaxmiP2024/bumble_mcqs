@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Bumble-Like App</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="profile-card" class="card">
+            <img id="profile-pic" src="" alt="Profile Picture">
+            <h2 id="profile-name">Name</h2>
+            <p id="profile-age">Age: </p>
+            <p id="profile-bio">Bio: </p>
+        </div>
+        <div class="buttons">
+            <button id="like-btn" class="btn">Like</button>
+            <button id="next-btn" class="btn">Next</button>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    const profiles = [
+        {
+            name: "Minnie",
+            age: 25,
+            bio: "Love hiking and outdoor adventures!",
+            pic: "https://i.pinimg.com/474x/3a/35/bf/3a35bf5f52bcf8db03f7ec7a29821f5c.jpg",
+        },
+        {
+            name: "Daisy",
+            age: 30,
+            bio: "Tech enthusiast and gamer.",
+            pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvLmaetbGHn5OXi33ckllKcFy2_JsfW7iGnA&s",
+        },
+        {
+            name: "Mickey",
+            age: 28,
+            bio: "A foodie who loves to travel.",
+            pic: "https://listium-res.cloudinary.com/image/upload/w_800,h_800,c_limit,q_auto,f_auto/n8zevii3vudmmnunajfk.jpg",
+        },
+        {
+            name: "Donald",
+            age: 25,
+            bio: "Love hiking and outdoor adventures!",
+            pic: "https://imagesvs.oneindia.com/webp/img/2019/06/donaldduck-1560061560.jpg",
+        },
+    ];
+
+    let currentIndex = 0;
+
+    function loadProfile(index) {
+        const profile = profiles[index];
+        document.getElementById("profile-pic").src = profile.pic;
+        document.getElementById("profile-name").innerText = profile.name;
+        document.getElementById("profile-age").innerText = `Age: ${profile.age}`;
+        document.getElementById("profile-bio").innerText = profile.bio;
+    }
+
+    function likeProfile() {
+        const profile = profiles[currentIndex];
+        console.log(`You liked ${profile.name}`);
+        nextProfile();
+    }
+
+    function nextProfile() {
+        currentIndex = (currentIndex + 1) % profiles.length; // Loop back to the start
+        loadProfile(currentIndex);
+    }
+
+    document.getElementById("like-btn").addEventListener("click", likeProfile);
+    document.getElementById("next-btn").addEventListener("click", nextProfile);
+
+    window.onload = () => {
+        loadProfile(currentIndex);
+    };
+
+</script>
+
+</html>
